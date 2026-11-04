@@ -5,3 +5,4 @@ toc: true
 code-fold: false
 code-tools: true      # adds a menu to view/copy source
 freeze: auto
+bibliography: ../references.bib   # papers.qmd uses its own papers.bib

@@ -63,7 +63,6 @@ format:
           };
           </script>
 
-bibliography: references.bib
 csl: https://raw.githubusercontent.com/citation-style-language/styles/master/apa.csl
 
 execute:

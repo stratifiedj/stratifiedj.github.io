@@ -23,6 +23,8 @@ jobs:
 
       - name: Set up Quarto
         uses: quarto-dev/quarto-actions/setup@v2
+        with:
+          version: 1.9.38   # match local Quarto so previews match the live site
 
       # Only needed because the sample blog post executes Python.
       # Delete this whole block (and requirements.txt) if your posts don't run code.
