@@ -1,0 +1,17 @@
+/* Minor tweaks. Most styling lives in theme.scss. */
+
+/* Tighten the gap between a post's title and its meta line */
+.quarto-title-meta { margin-top: 0.25rem; }
+
+/* Make blockquotes read as asides rather than pull-quotes */
+blockquote {
+  border-left: 3px solid #e7eeee;
+  color: #4a5157;
+  font-size: 0.97em;
+}
+
+/* Category pills on the blog listing */
+.quarto-category {
+  background: #e7eeee;
+  color: #2f5d62;
+}

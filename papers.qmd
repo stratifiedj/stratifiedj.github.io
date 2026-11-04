@@ -1,0 +1,32 @@
+---
+title: "Papers"
+toc: false
+bibliography: papers.bib   # this page lists only my own papers; posts use references.bib
+nocite: |
+  @*
+filters:
+  - _filters/papers-authors.lua   # bold my name, keep * for equal contribution
+---
+
+Full list also on
+[Google Scholar](https://scholar.google.com/citations?user=4f3XjnoAAAAJ)
+
+## Selected work
+
+**Mimicking pathways underlying complex traits using existing GWAS resources.** *In revision at Nature Genetics*, 2026. [@wang2026nsever]
+
+Introduces **MaxGCP<sub>R</sub>** and **N-SEVER**, two summary statistic-only methods for recombining existing phenotypes into new ones. The outputs of these methods can represent genetic pathways that contribute to traits of interest. We demonstrate this by isolating an insulin-deficiency axis in T2D and discovering MDD loci from structural brain MRI. 
+Technically, these methods produce linear combinations of existing phenotypes that maximize genetic overlap with a target trait. N-SEVER additionally controls for heritable covariates with only summary statistics and without collider bias. 
+
+**`h2opt`: heritability-optimized representation learning.**
+*In preparation*, 2026. [@wang2026h2opt]
+
+We provide a suite of tools for quickly estimating heritability in an auto-differentiable manner. These tools revolve around fast GPU-based estimation of GWAS summary statistics together with a low-rank update optimization for compatibility with stochastic gradient descent. 
+VAEs and transformers regularized with these tools improve locus discovery and polygenic prediction relative to unregularized models and expert-derived features.
+We further link this approach with iVAEs [Khemakhem et al. 2020](https://arxiv.org/pdf/1907.04809), showing that our approach enjoys similar identifiability properties to ICA. 
+
+## Preprints & papers
+A `*` denotes equal contribution. 
+
+::: {#refs}
+:::

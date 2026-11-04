@@ -1,0 +1,13 @@
+/_site/
+/.quarto/
+# Comment the next line out if you want cached executed output committed
+# (recommended for reproducible deploys when code cells are slow):
+/_freeze/
+.DS_Store
+__pycache__/
+
+**/*.quarto_ipynb
+
+# local tooling / scratch
+.claude/
+_bibtest_files/

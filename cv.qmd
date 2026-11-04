@@ -1,0 +1,38 @@
+---
+title: "Curriculum Vitae ([PDF](assets/cv.pdf))"
+pagetitle: "Curriculum Vitae"
+toc: false
+---
+
+## Education
+
+**PhD, Bioinformatics (Statistical Genetics)** · UCLA · 2022–present
+: Advisor: Noah Zaitlen. Focus: phenotype imputation, representation learning.
+
+**B.S., Mathematics and Computer Science** · Brown University · 2022
+: Categorification of threshold arrangements.
+
+## Research interests
+
+Statistical genetics · representation learning · medical imaging
+
+## Publications
+
+See the [Papers](papers.qmd) page.
+
+## Selected talks & posters
+
+**Concentrating association power along specific biological pathways by controlling for heritable covariates in proxy GWAS** · Probabilistic Modeling of Genomes · March 2026
+: Defining new phenotypes that mimic the tissue-level pathways underlying complex traits for genetic discovery.
+
+**The problem with gestalt genetics: genetic association does not commute with addition** · Probabilistic Modeling of Genomes · March 2025
+: Taking linear combinations of phenotypes (e.g. skeletal lengths for height, questionnaire items for psychiatry) strongly obscures specific genetic signals. 
+
+## Awards & funding
+
+- T32 in neuropsychiatric genetics, 2023-2025
+
+## Skills
+
+- **Languages:** Python, R, bash
+- **Methods:** GWAS and post-GWAS methods, biobank data engineering (RAP, AWS), deep learning pipelines (PyTorch), high-dimensional statistics. 

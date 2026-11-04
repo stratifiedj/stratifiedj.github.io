@@ -1,0 +1,34 @@
+---
+title: "Notes"
+subtitle: "Notes on statistics, machine learning, and genetics."
+listing:
+  contents: posts
+  sort: "date desc"
+  type: default          # try 'grid' or 'table' for other looks
+  categories: true
+  sort-ui: false
+  filter-ui: false
+  fields: [title, date]  # keep each entry minimal — no author, tags, or description
+  feed: true             # generates notes.xml (RSS) — linked in the navbar
+page-layout: full
+title-block-banner: false
+---
+
+```{=html}
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  // Move the auto-generated category list out of the margin sidebar and
+  // place it as a horizontal row directly beneath the page subtitle.
+  var cats = document.querySelector(".quarto-listing-category");
+  var titleBlock = document.querySelector("#title-block-header .quarto-title");
+  if (cats && titleBlock) {
+    var wrap = document.createElement("div");
+    wrap.className = "posts-categories";
+    wrap.appendChild(cats);
+    titleBlock.appendChild(wrap);
+  }
+  var catTitle = document.querySelector(".quarto-listing-category-title");
+  if (catTitle) catTitle.remove();
+});
+</script>
+```

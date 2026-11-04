@@ -1,0 +1,72 @@
+project:
+  type: website
+  output-dir: _site
+  render:
+    - "*.qmd"
+    - "!template/"   # unpublished reference post
+
+website:
+  title: "Jeremy Wang"
+  description: "Computational and statistical genetics — GWAS methods, heritability, and representation learning."
+  site-url: "https://stratifiedj.github.io"
+  favicon: assets/m_0n_bar.png
+  search: false
+  navbar:
+    pinned: true
+    left:
+      - href: index.qmd
+        text: About
+      - href: papers.qmd
+        text: Papers
+      - href: cv.qmd
+        text: CV
+      - href: notes.qmd
+        text: Notes
+    right:
+      - icon: github
+        href: https://github.com/stratifiedj
+        aria-label: GitHub
+      - text: "{{< iconify academicons google-scholar >}}"
+        href: https://scholar.google.com/citations?user=4f3XjnoAAAAJ
+  page-footer:
+    right: "Built with [Quarto](https://quarto.org)"
+  open-graph: true
+
+format:
+  html:
+    theme:
+      - cosmo
+      - styles.scss
+    toc: true
+    toc-depth: 3
+    code-copy: true
+    code-overflow: wrap
+    highlight-style: github
+    html-math-method: mathjax
+    include-in-header:
+      - text: |
+          <script>
+          window.MathJax = {
+            tex: {
+              tags: 'ams',
+              macros: {
+                rg: "r_{g}",
+                hsq: "h^{2}",
+                var: ["\\operatorname{Var}\\left(#1\\right)", 1],
+                cov: ["\\operatorname{Cov}\\left(#1,#2\\right)", 2],
+                E: ["\\mathbb{E}\\left[#1\\right]", 1],
+                bnull: "\\mathcal{N}",
+                proj: ["\\mathbf{P}_{#1}"],
+                T: "^{\\mathsf{T}}"
+              }
+            }
+          };
+          </script>
+
+bibliography: references.bib
+csl: https://raw.githubusercontent.com/citation-style-language/styles/master/apa.csl
+
+execute:
+  freeze: auto      # re-run code only when a source file changes; cache under _freeze/
+  warning: false
+  message: false

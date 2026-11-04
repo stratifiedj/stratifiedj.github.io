@@ -1,0 +1,35 @@
+---
+title: "Jeremy Wang"
+subtitle: "Machine learning & statistical genetics"
+about:
+  template: trestles       # side-by-side photo + text; try 'jolla' or 'solana' for other looks
+  image: assets/sunflowers_and_bird_house.jpg
+  image-shape: rounded
+  links:
+    - icon: envelope
+      text: Email
+      href: mailto:jwang194@g.ucla.edu
+    - icon: github
+      text: GitHub
+      href: https://github.com/stratifiedj
+    - text: "{{< iconify academicons google-scholar >}} Scholar"
+      href: https://scholar.google.com/citations?user=4f3XjnoAAAAJ
+    - icon: mortarboard
+      text: CV
+      href: cv.qmd
+---
+
+I'm a PhD student in the [Zaitlen lab](https://scholar.google.com/citations?user=SPXgieEAAAAJ) at UCLA, working
+at the intersection of statistical genetics and machine learning. 
+In particular, I like thinking about pathways and subtypes underlying complex traits. My approach to understanding these ideas is based on novel computational methods for analyzing high-dimensional, biobank-scale data.
+These methods have a couple of related flavors:
+
+**Defining new phenotypes using genetics.** 
+Physicians, having a long history and being very clever, have carefully defined many traits of interest based on signs and symptoms. Biologists, not lacking cleverness themselves, have latched onto questions of clinical interest and learned to read off many other disease-relevant traits from molecular and imaging data. We statistical geneticists are lazy and naïve, so we tend to borrow the work of our colleagues as inputs to our computational pipelines. 
+
+While this approach has been successful, it is certain that the biologists and clinicians were not thinking about us when constructing their phenotypes; as a consequence, many of these phenotypes have large environmental components and are not necessarily cleanly separable by genetic etiology. My goal \(and, of course, that of many others\) is to start with genetics and use our unique expertise to refine the phenotypes that we study. I believe this will help us better understand the genetic pathways underlying the traits and diseases that we care about.
+
+**Improving representation learning.** 
+Relatedly, I am interested in questions around questions of utility in representation learning. In the lineage of disentanglement and identifiability, I think about how auxiliary data enables us to better condition our learned representations for downstream tasks. I care particularly about the power of linear probing over representations, given the relevance to genetics, and about verifying the statistical validity of such probes post-optimization.
+
+In a past life, I thought about combinatorial algebraic geometry, especially various properties of the moduli spaces of curves.

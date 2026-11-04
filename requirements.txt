@@ -1,0 +1,4 @@
+# Only needed if your blog posts execute Python code cells.
+jupyter
+numpy
+matplotlib

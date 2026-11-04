@@ -1,0 +1,7 @@
+# Defaults applied to every post in posts/ (override per-post in the post's YAML).
+title-block-banner: false
+author: "Jeremy Wang"
+toc: true
+code-fold: false
+code-tools: true      # adds a menu to view/copy source
+freeze: auto

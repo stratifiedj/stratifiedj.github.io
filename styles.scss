@@ -1,0 +1,137 @@
+/*-- scss:defaults --*/
+// A quiet academic palette: warm-neutral paper, ink text, and a single
+// muted viridian accent (a nod to the viridis colormap this field lives in).
+// Everything is deliberately low-key so that math, figures, and prose lead.
+
+$paper:        #fbfaf7;
+$ink:          #1c1e21;
+$muted:        #5b6167;
+$accent:       #2a6f6b;   // muted viridian
+$accent-deep:  #1d4e4b;
+$rule:         #e6e3dc;
+
+$body-bg:      $paper;
+$body-color:   $ink;
+$link-color:   $accent;
+$navbar-bg:    $paper;
+$navbar-fg:    $ink;
+
+// Type: a characterful text serif for reading, a clean sans for UI/headings.
+$font-family-serif: "Source Serif 4", "Iowan Old Style", Georgia, serif;
+$font-family-sans-serif: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+$font-family-base: $font-family-serif;
+$headings-font-family: $font-family-sans-serif;
+$font-family-monospace: "JetBrains Mono", "SFMono-Regular", ui-monospace, monospace;
+
+$toc-color: $accent;
+$code-block-bg: #f4f2ec;
+
+/*-- scss:rules --*/
+
+// Pull the reading faces from Google Fonts (drop these @imports if you'd
+// rather self-host, which is faster and avoids the external request).
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:ital,opt_sz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap');
+
+body {
+  font-size: 1.04rem;
+  line-height: 1.7;
+}
+
+h1, h2, h3, h4 {
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+// Section headings get a hairline underline in the accent — a small
+// structural signal, not decoration.
+h2 {
+  border-bottom: 1px solid $rule;
+  padding-bottom: 0.3rem;
+  margin-top: 2.4rem;
+}
+
+.navbar-title {
+  font-family: $font-family-sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+a {
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+
+// Blog listing: quiet, dense, scannable.
+.quarto-listing-category .category {
+  color: $muted;
+}
+
+div.quarto-post .listing-title {
+  font-family: $font-family-sans-serif;
+}
+
+// A restrained lead paragraph style for the homepage intro.
+.lead {
+  font-size: 1.18rem;
+  color: $muted;
+  line-height: 1.6;
+}
+
+// Give displayed math a touch more room to breathe.
+.display, mjx-container[display="true"] {
+  margin: 1.1rem 0;
+}
+
+blockquote {
+  border-left: 3px solid $accent;
+  color: $muted;
+}
+
+// Homepage (trestles about layout): keep the photo + links column fixed
+// while only the prose on the right scrolls.
+.quarto-about-trestles {
+  align-items: flex-start;
+
+  .about-entity {
+    position: sticky;
+    top: 5rem;              // clears the pinned navbar
+    align-self: flex-start;
+  }
+}
+
+// Blog listing: categories as a horizontal pill row under the subtitle
+// (relocated there from the margin sidebar by a small script in posts.qmd).
+.posts-categories {
+  margin: 0.9rem 0 0.4rem;
+
+  .quarto-listing-category {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem 0.5rem;
+    padding: 0;
+    margin: 0;
+  }
+
+  .category {
+    cursor: pointer;
+    font-family: $font-family-sans-serif;
+    font-size: 0.82rem;
+    line-height: 1;
+    color: $muted;
+    background: $code-block-bg;
+    border: 1px solid $rule;
+    border-radius: 999px;
+    padding: 0.32rem 0.7rem;
+    transition: color 0.15s ease, border-color 0.15s ease;
+
+    &:hover,
+    &.active {
+      color: $accent-deep;
+      border-color: $accent;
+    }
+
+    .quarto-category-count {
+      color: $muted;
+    }
+  }
+}

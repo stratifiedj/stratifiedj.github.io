@@ -1,0 +1,70 @@
+/*-- scss:defaults --*/
+// A restrained layer on top of `cosmo`. The goal is a calm, readable academic
+// site — a serif for body text (easier on long math-heavy posts) and a clean
+// sans for UI, with a single muted accent. Change $accent to re-skin the site.
+
+$accent:        #2f5d62;   // muted teal-green
+$accent-light:  #e7eeee;
+
+$font-family-sans-serif: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+$font-family-serif:      "Source Serif 4", Georgia, "Times New Roman", serif;
+
+$primary:   $accent;
+$link-color: $accent;
+$body-color: #1f2328;
+
+$font-size-root: 17px;
+$line-height-base: 1.65;
+
+/*-- scss:rules --*/
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap');
+
+body {
+  font-family: $font-family-serif;
+}
+
+h1, h2, h3, h4, .navbar, .quarto-title-banner {
+  font-family: $font-family-sans-serif;
+  letter-spacing: -0.01em;
+}
+
+h1 { font-weight: 600; }
+h2 { font-weight: 600; margin-top: 2rem; }
+
+.navbar-brand { font-weight: 600; }
+
+a { text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+// Give code blocks a bit of breathing room and a soft background.
+div.sourceCode {
+  border-radius: 6px;
+  border-left: 3px solid $accent;
+}
+
+// Publication list styling (used on publications.qmd)
+.pub-year {
+  font-family: $font-family-sans-serif;
+  font-weight: 600;
+  color: $accent;
+  border-bottom: 1px solid $accent-light;
+  padding-bottom: 0.2rem;
+  margin-top: 1.75rem;
+}
+
+// A small "profile" layout for the homepage
+.profile-header {
+  display: flex;
+  gap: 1.75rem;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+.profile-header img {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+@media (max-width: 575px) {
+  .profile-header img { width: 110px; height: 110px; }
+}

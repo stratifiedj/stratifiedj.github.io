@@ -1,0 +1,135 @@
+---
+title: "What the LDSC intercept actually measures"
+description: "A small simulation showing how LD score regression tells confounding apart from polygenicity — even when the genomic inflation factor can't."
+date: 2026-02-14
+categories: [genetics, statistics]
+image: thumbnail.png
+bibliography: ../../references.bib
+# execute options can be set per-post; inherited defaults live in posts/_metadata.yml
+---
+
+A genome-wide association study can look "inflated" for two very different reasons,
+and telling them apart is the whole reason LD score regression exists
+[@buliksullivan_ldsc_2015]. This post is a toy simulation of that distinction —
+and an excuse to show how math and live code sit together in a Quarto post.
+
+## The two stories behind an inflated statistic
+
+Write $\chi^2_j$ for the association statistic at SNP $j$, and $\ell_j$ for its
+**LD score** — roughly, how much of the genome SNP $j$ "sees" through linkage
+disequilibrium. LDSC's central identity is
+
+$$
+\E[\chi^2_j] \;=\; \underbrace{\frac{N \hsq}{M}\,\ell_j}_{\text{polygenic signal}}
+\;+\; \underbrace{1 + Na}_{\text{intercept}},
+$$
+
+for sample size $N$, $M$ SNPs, SNP-heritability $\hsq$, and a confounding term $a$
+(population structure, cryptic relatedness, and friends). The key move is that these
+two contributions have *different shapes* in $\ell_j$:
+
+- **Real polygenicity** makes $\E[\chi^2_j]$ grow with $\ell_j$ — a nonzero *slope*.
+- **Confounding** shifts every statistic up by the same amount, regardless of
+  $\ell_j$ — it lives in the *intercept*.
+
+The classic summary of inflation, the genomic control factor
+$\lambda_{\mathrm{GC}} = \operatorname{median}(\chi^2) / 0.4549$, collapses both
+effects into one number and so *cannot* separate them. LDSC can, by regressing
+$\chi^2_j$ on $\ell_j$ and reading off intercept versus slope.
+
+Let's watch that happen.
+
+## A simulation with two SNP sets, same inflation
+
+We build two null-ish scenarios engineered to have **the same overall inflation**
+but opposite causes: one pure confounding, one pure polygenicity.
+
+```{python}
+#| label: simulate
+#| fig-cap: "Same λ_GC, different LDSC decomposition. Left: χ² vs LD score. Right: sampling distributions."
+#| fig-width: 9
+#| fig-height: 3.8
+import numpy as np
+import matplotlib.pyplot as plt
+
+rng = np.random.default_rng(20260214)
+M = 50_000                       # SNPs
+CHI2_1_MEDIAN = 0.454936         # median of a chi-square_1 random variable
+
+# LD scores: positive, right-skewed, mean ~ 50 (illustrative, not calibrated)
+ell = rng.gamma(shape=2.0, scale=25.0, size=M)
+
+def chi2_from_variance(var_inflation):
+    """Draw chi-square_1 statistics whose per-SNP mean is `var_inflation`."""
+    z = rng.normal(0.0, np.sqrt(var_inflation))
+    return z**2
+
+# Scenario A — pure CONFOUNDING: uniform variance inflation, no dependence on ell.
+mean_chi2_A = 1.0 + 0.30 * np.ones(M)          # intercept 1.30, slope 0
+chi2_A = chi2_from_variance(mean_chi2_A)
+
+# Scenario B — pure POLYGENICITY: inflation rides on the LD score.
+slope_true = 0.30 / ell.mean()                 # tuned so mean matches Scenario A
+mean_chi2_B = 1.0 + slope_true * ell           # intercept 1.00, slope > 0
+chi2_B = chi2_from_variance(mean_chi2_B)
+
+def lambda_gc(chi2):
+    return np.median(chi2) / CHI2_1_MEDIAN
+
+def ldsc_fit(chi2, ell):
+    slope, intercept = np.polyfit(ell, chi2, 1)   # OLS; real LDSC uses weighting
+    return intercept, slope
+
+for name, chi2 in [("A: confounding", chi2_A), ("B: polygenicity", chi2_B)]:
+    b0, b1 = ldsc_fit(chi2, ell)
+    print(f"{name:18s}  λ_GC = {lambda_gc(chi2):.3f}   "
+          f"LDSC intercept = {b0:.3f}   slope = {b1:.4f}")
+```
+
+Both scenarios report essentially the same $\lambda_{\mathrm{GC}}$ — a naive reader
+would call them equally "inflated." But the regression tells the real story: scenario
+A piles its inflation into the intercept (confounding), while B pushes it into the
+slope (heritable signal, intercept near 1).
+
+```{python}
+#| label: fig-decompose
+#| echo: false
+fig, (axL, axR) = plt.subplots(1, 2, figsize=(9, 3.8))
+
+# Left: binned means of chi2 against LD score, with fitted lines
+bins = np.quantile(ell, np.linspace(0, 1, 21))
+centers = 0.5 * (bins[:-1] + bins[1:])
+idx = np.digitize(ell, bins[1:-1])
+for chi2, color, lab in [(chi2_A, "#c15b3f", "confounding"),
+                         (chi2_B, "#2f5d62", "polygenicity")]:
+    binned = [chi2[idx == k].mean() for k in range(len(centers))]
+    axL.scatter(centers, binned, s=14, color=color, alpha=0.8, label=lab)
+    b0, b1 = ldsc_fit(chi2, ell)
+    axL.plot(centers, b0 + b1 * centers, color=color, lw=1.5)
+axL.axhline(1.0, ls=":", color="grey", lw=1)
+axL.set_xlabel("LD score  $\\ell_j$"); axL.set_ylabel("mean  $\\chi^2$")
+axL.set_title("LDSC view: intercept vs slope"); axL.legend(frameon=False)
+
+# Right: the chi2 distributions look alike
+axR.hist(chi2_A, bins=80, range=(0, 8), alpha=0.5, color="#c15b3f", density=True)
+axR.hist(chi2_B, bins=80, range=(0, 8), alpha=0.5, color="#2f5d62", density=True)
+axR.set_xlabel("$\\chi^2$"); axR.set_ylabel("density")
+axR.set_title("Marginal distributions (nearly identical)")
+fig.tight_layout()
+plt.show()
+```
+
+## The takeaway
+
+The intercept isn't a nuisance you subtract and forget — it's the estimand that
+answers "is my inflation real?" That's why a well-behaved GWAS reports an LDSC
+intercept close to 1 even when $\lambda_{\mathrm{GC}}$ is comfortably above it: the
+excess is polygenic signal living in the slope, not confounding living in the
+intercept.
+
+::: {.callout-note}
+This is a caricature — real LDSC weights observations by $1/\ell_j$ and by the
+expected variance of $\chi^2$, and estimates $\hsq$ from the slope with a proper
+standard error. The point here is only the *shape* argument. Swap in real LD scores
+and munged summary statistics and the same picture holds.
+:::
