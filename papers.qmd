@@ -21,8 +21,8 @@ Technically, these methods produce linear combinations of existing phenotypes th
 **`h2opt`: heritability-optimized representation learning.**
 *In preparation*, 2026. [@wang2026h2opt]
 
-We provide a suite of tools for quickly estimating heritability in an auto-differentiable manner. These tools revolve around fast GPU-based estimation of GWAS summary statistics together with a low-rank update optimization for compatibility with stochastic gradient descent. 
-VAEs and transformers regularized with these tools improve locus discovery and polygenic prediction relative to unregularized models and expert-derived features.
+We provide a suite of tools for quickly estimating heritability in an auto-differentiable manner. These tools revolve around fast GPU-based estimation of GWAS summary statistics together with a  a Hutchison trace estimator and low-rank update optimization for compatibility with stochastic gradient descent. 
+VAEs regularized with these tools improve locus discovery and polygenic prediction relative to unregularized models and expert-derived features.
 We further link this approach with iVAEs [Khemakhem et al. 2020](https://arxiv.org/pdf/1907.04809), showing that our approach enjoys similar identifiability properties to ICA. 
 
 ## Preprints & papers
