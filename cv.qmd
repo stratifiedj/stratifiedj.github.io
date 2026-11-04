@@ -2,6 +2,8 @@
 title: "Curriculum Vitae ([PDF](assets/cv.pdf))"
 pagetitle: "Curriculum Vitae"
 toc: false
+resources:
+  - assets/cv.pdf   # linked only from the title, which Quarto doesn't scan
 ---
 
 ## Education
