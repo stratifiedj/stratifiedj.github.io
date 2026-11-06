@@ -3,7 +3,7 @@ title: "Jeremy Wang"
 subtitle: "Machine learning & statistical genetics"
 about:
   template: trestles       # side-by-side photo + text; try 'jolla' or 'solana' for other looks
-  image: assets/cliff_walk_flowers.jpg
+  image: assets/cliff_walk_flowers.jpeg
   image-shape: rounded
   links:
     - icon: envelope

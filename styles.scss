@@ -88,14 +88,17 @@ blockquote {
 }
 
 // Homepage (trestles about layout): keep the photo + links column fixed
-// while only the prose on the right scrolls.
-.quarto-about-trestles {
-  align-items: flex-start;
+// while only the prose on the right scrolls. Desktop only: below lg the
+// layout stacks, and a sticky photo block would cover the text on phones.
+@include media-breakpoint-up(lg) {
+  .quarto-about-trestles {
+    align-items: flex-start;
 
-  .about-entity {
-    position: sticky;
-    top: 5rem;              // clears the pinned navbar
-    align-self: flex-start;
+    .about-entity {
+      position: sticky;
+      top: 5rem;            // clears the pinned navbar
+      align-self: flex-start;
+    }
   }
 }
 
