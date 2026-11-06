@@ -102,6 +102,31 @@ blockquote {
   }
 }
 
+// Homepage links: a plain row of icons (labels are visually hidden in
+// index.qmd) instead of trestles' bordered buttons, on every screen size.
+div.quarto-about-trestles .about-entity {
+  .about-links {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.25rem;
+    width: auto;
+    padding-bottom: 0;
+  }
+
+  .about-link {
+    border: none;
+    padding: 0;
+    font-size: 1.5rem;
+    line-height: 1;
+    color: $muted;
+    transition: color 0.15s ease;
+
+    &:hover { color: $accent; }
+    i.bi { margin-right: 0; }
+  }
+}
+
 // Blog listing: categories as a horizontal pill row under the subtitle
 // (relocated there from the margin sidebar by a small script in posts.qmd).
 .posts-categories {

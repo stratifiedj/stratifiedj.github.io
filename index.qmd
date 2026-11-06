@@ -7,15 +7,15 @@ about:
   image-shape: rounded
   links:
     - icon: envelope
-      text: Email
+      text: "[Email]{.visually-hidden}"   # icon only; label for screen readers
       href: mailto:jwang194@g.ucla.edu
     - icon: github
-      text: GitHub
+      text: "[GitHub]{.visually-hidden}"   # icon only; label for screen readers
       href: https://github.com/stratifiedj
-    - text: "{{< iconify academicons google-scholar >}} Scholar"
+    - text: "{{< iconify academicons google-scholar >}} [Google Scholar]{.visually-hidden}"
       href: https://scholar.google.com/citations?user=4f3XjnoAAAAJ
     - icon: mortarboard
-      text: CV
+      text: "[CV]{.visually-hidden}"   # icon only; label for screen readers
       href: cv.qmd
 ---
 
